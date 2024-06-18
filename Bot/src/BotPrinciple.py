@@ -2,7 +2,7 @@ import asyncio
 import random
 
 async def when_change():
-    randomTime = random.randint(60, 90)
+    randomTime = random.randint(15, 20)
     await asyncio.sleep(randomTime)
 
 async def choose_word(list):

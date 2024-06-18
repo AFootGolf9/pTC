@@ -8,7 +8,7 @@ USER_SCOPE = [AuthScope.CHAT_READ]
 
 def get_config():
     config = configparser.ConfigParser()
-    config.read('./res/config.ini')
+    config.read('./Bot/res/config.ini')
     id = config['OAuth']['app_id']
     secret = config['OAuth']['app_secret']
     return id, secret

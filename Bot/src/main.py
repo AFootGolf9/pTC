@@ -1,8 +1,9 @@
 import asyncio
 import TwitchValidation
-from BotPrinciple import when_change, choose_word, sort_words
+from BotPrinciple import when_change, sort_words
 from twitchAPI.chat import ChatMessage, EventData
 from twitchAPI.type import ChatEvent
+import requests
 
 words_said = []
 words_dict = {}
@@ -10,7 +11,7 @@ words_dict = {}
 async def on_ready(ready: EventData):
     print('Chat is ready')
 
-    await ready.chat.join_room('ibai')
+    await ready.chat.join_room('afootgolf9')
 
 async def on_message(msg: ChatMessage):
     msg_words = msg.text.split(' ')
@@ -35,23 +36,12 @@ async def main():
 
     while True:
         await when_change()
-        # theWord = choose_word(words_dict)
         sorted_words = sort_words(words_dict)
         words_dict = {}
         words_said = []
         sorted_words = await sorted_words
-        for word in sorted_words:
-            print(f'{word}: {sorted_words[word]} times')
-        print('\n\n\n\n')
-        # print(f'The word is {await theWord}')
 
-    # try:
-    #     input('Press enter to stop\n')
-    # finally:
-    #     chat.stop()
-    #     await twitch.close()
-    #     for word in words_dict:
-    #         print(f'{word}: {words_dict[word]["count"]} times')
+        requests.post('http://localhost:5000/update', json=sorted_words)
 
 if __name__ == '__main__':
     asyncio.run(main())
