@@ -7,11 +7,12 @@ import requests
 
 words_said = []
 words_dict = {}
+chanel = 'afootgolf9'
 
 async def on_ready(ready: EventData):
     print('Chat is ready')
 
-    await ready.chat.join_room('afootgolf9')
+    await ready.chat.join_room(chanel)
 
 async def on_message(msg: ChatMessage):
     msg_words = msg.text.split(' ')
